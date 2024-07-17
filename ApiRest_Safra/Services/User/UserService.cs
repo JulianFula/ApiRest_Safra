@@ -4,6 +4,8 @@ using ApiRest_Safra.Models.DbContext;
 using Microsoft.EntityFrameworkCore;
 using ApiRest_Safra.Models.User;
 using ApiRest_Safra.Models.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
+using ApiRest_Safra.Controllers;
 
 namespace ApiRest_Safra.Services.User;
 
@@ -63,13 +65,35 @@ public class UserService : IUserServices
         
     }
 
-    public Task<UserResponse> DeleteUser(UserRequest UserRequest)
+    public async Task<UserResponse> DeleteUser(int Id)
     {
-        throw new NotImplementedException();
+        var user = await _dbContext.User.FindAsync(Id);
+
+        if (user == null)
+        {
+            return new UserResponse() { response = true, message = "Not Found" };
+        }
+
+        _dbContext.User.Remove(user);
+        await _dbContext.SaveChangesAsync();
+
+        return new UserResponse() { response = true, message = "Registro Eliminado" };
     }
 
-    public Task<UserResponse> UpdateUser(UserRequest UserRequest)
+    public async Task<UserResponse> UpdateUser(UserDTO UserRequest)
     {
-        throw new NotImplementedException();
+        var user = await _dbContext.User.FindAsync(UserRequest.UsrUserId);
+
+        if (user == null)
+        {
+            return new UserResponse() { response = true, message = "Not Found" };
+        }
+
+        user.UsrEmail = UserRequest.UsrEmail;
+        user.UsrPass = UserRequest.UsrPass;
+
+        await _dbContext.SaveChangesAsync();
+
+        return new UserResponse() { response = true, message = "Registro Editado Correctamente" };
     }
 }

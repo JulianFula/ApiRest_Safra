@@ -10,8 +10,8 @@ public interface IUserServices
     //Se crea en el servicio el metodo para consultar usuarios
     Task<UserResponse> GetAllUsers();
     //Se crea en el servicio el metodo para editar Usuarios
-    Task<UserResponse> UpdateUser(UserRequest UserRequest);
+    Task<UserResponse> UpdateUser(UserDTO UserRequest);
     //Se crea en el servicio el metodo para eliminar usuario
-    Task<UserResponse> DeleteUser(UserRequest UserRequest);
+    Task<UserResponse> DeleteUser(int id);
     
 }
