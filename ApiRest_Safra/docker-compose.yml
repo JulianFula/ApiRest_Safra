@@ -4,16 +4,8 @@ services:
   web:
     build: .
     ports:
-      - "80:80"
-      - "443:443"
+      - "8080:8080"
     environment:
-      ConnectionStrings__DefaultConnection: "Data Source=/app/MyDatabase.db;"
-    depends_on:
-      - db
-
-  db:
-    image: sqlite
+      ConnectionStrings__DefaultConnection: "Data Source=/app/data/MyDatabase.db;"
     volumes:
-      - ./data:/data
-    environment:
-      DB_CONNECTION_STRING: "Data Source=/data/MyDatabase.db"
+      - ./data:/app/data

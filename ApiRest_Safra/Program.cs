@@ -23,7 +23,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IAuthorizationServices, AuthorizationService>();
 builder.Services.AddScoped<IUserServices, UserService>();
 builder.Services.AddScoped<IClientServices, ClientService>();
-//builder.Services.AddScoped<IQUERYs, CommandService>();
 
 var key = builder.Configuration.GetValue<string>("JwtSettings:key");
 var keyByte = Encoding.ASCII.GetBytes(key);
@@ -54,15 +53,25 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    DbInitializer.Initialize(services);
+    try
+    {
+        DbInitializer.Initialize(services);
+    }
+    catch (Exception ex)
+    {
+        // Log the error (uncomment ex variable name and write a log.)
+        Console.WriteLine(ex.ToString());
+    }
 }
 
+app.UseSwagger();
+app.UseSwaggerUI();
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
 
 app.UseHttpsRedirection();
 
