@@ -26,13 +26,13 @@ Esta es una API RESTful creada con .NET.
 
 Puedes probar la API utilizando [Postman](https://www.postman.com/) o [curl](https://curl.se/).
 
-1.Para realizar un nuevo registro debe usarse el metodo CreateUser en el se pedira el Schema UserRequest.
+1.Para realizar un nuevo registro debe usarse el metodo CreateUser, en el se pedira el Schema UserRequest.
 
-2.Para realizar el login en la aplicacion puede hacerlo con el usuario anteriormente creado o usar los siguientes datos de prueba
+2.Para realizar el registro en la aplicacion puede hacerlo con el usuario anteriormente creado o usar los siguientes datos de prueba:
     UsrEmail="user1@example.com", UsrPass="Password1"
     UsrEmail="user2@example.com", UsrPass="Password2"
     
-3.Los metodos correspondientes al CRUD de Users piden el JWT Token que se entrega al logerse en la aplicacion
+3.Los metodos correspondientes al CRUD de Users piden el JWT Token que se entrega al registrarse en la aplicacion
 
-4.Para probar los endPoits correspondientes a la descarga y carga de archivos CVS, recomiendo primero usar el metodo ExportClientsToCsv para asi obtener el archivo con los headers necesarios para la carga y guardado en el metodo UploadClientsCSV
+4.Para probar los EndPoints correspondientes a la descarga y carga de archivos CVS, recomiendo primero usar el metodo ExportClientsToCsv para asi obtener el archivo con los headers necesarios para la carga y guardado en el metodo UploadClientsCSV.
 
